@@ -758,6 +758,14 @@ body {
   position: relative;
   border-top-right-radius: 80px;
   border-bottom-left-radius: 120px;
+  overflow: hidden; /* Ensure the video fits within the rounded edges */
+}
+
+.video-banner video {
+  width: 100%; /* Ensure the video spans the width of its container */
+  height: auto; /* Maintain aspect ratio */
+  border-top-right-radius: 80px;
+  border-bottom-left-radius: 120px;
 }
 
 .video .play-btn {
@@ -771,8 +779,10 @@ body {
   color: var(--white);
   border-radius: var(--radius-circle);
   box-shadow: 0 0 0 0 var(--white_50);
-  z-index: 1;
+  z-index: 2; /* Ensure it appears above the video */
+  display: none; /* Hidden by default */
   animation: pulse 3s ease infinite;
+  cursor: pointer; /* Indicate it's clickable */
 }
 
 @keyframes pulse {
@@ -785,8 +795,12 @@ body {
 }
 
 .video-banner::after {
+  content: ''; /* Ensure the pseudo-element works correctly */
+  position: absolute;
   inset: 0;
   background-color: var(--black_30);
+  z-index: 1; /* Behind the play button */
+  pointer-events: none; /* Ensure it doesn't interfere with interactions */
 }
 
 /*-----------------------------------*\
